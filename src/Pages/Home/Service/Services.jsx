@@ -7,11 +7,11 @@ const Services = () => {
     const [services,setServices] = useState([])
 
     useEffect( () => {
-        fetch("service.json")
+        fetch("http://localhost:5000/services")
         .then(res => res.json())
         .then(data => setServices(data))
     },[])
-    console.log(services);
+    // console.log(services);
     return (
         <div>
             <div className="text-center py-10 space-y-3 pb-10">

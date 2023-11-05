@@ -1,11 +1,14 @@
 import { useContext } from "react";
 import img from "../../assets/images/login/login.svg"
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
+import axios from "axios";
 
 const Login = () => {
 
-    const  {userLogin} = useContext(AuthContext)
+    const { userLogin } = useContext(AuthContext)
+    const navigate = useNavigate()
+    const location = useLocation()
 
     const hendelLogin = (e) => {
         e.preventDefault()
@@ -14,13 +17,26 @@ const Login = () => {
         const email = form.email.value
         const password = form.password.value
 
-        userLogin(email,password)
-        .then(res => {
-            console.log(res.user);
-        })
-        .catch(err => {
-            console.log(err);
-        })
+        userLogin(email, password)
+            .then(res => {
+                const logedinUser = res.user
+                console.log(logedinUser);
+                const user = { email }
+
+                // get acess token
+                axios.post("http://localhost:5000/jwt", user,
+                    { withCredentials: true }
+                )
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data.success) {
+                            navigate(location?.state ? location?.state : "/")
+                        }
+                    })
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
     return (
         <div className="hero min-h-screen">
@@ -50,7 +66,7 @@ const Login = () => {
                             <input type="submit" value="Submit" className="btn btn-primary border-none bg-[#FF3811]" />
                         </div>
                     </form>
-                    <p className="p-8 text-center">New to Car Doctor <Link to="/signup" className="text-[#FF3811] font-bold">Sign Up</Link> </p> 
+                    <p className="p-8 text-center">New to Car Doctor <Link to="/signup" className="text-[#FF3811] font-bold">Sign Up</Link> </p>
                 </div>
             </div>
         </div>
