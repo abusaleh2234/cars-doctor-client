@@ -9,7 +9,7 @@ const Bookings = () => {
     const { user } = useContext(AuthContext)
     const [bookings, setBookings] = useState([])
 
-    const url = `http://localhost:5000/bookings?email=${user.email}`
+    const url = `https://cars-doctor-server-2nd.vercel.app/bookings?email=${user.email}`
     console.log(user);
 
 
@@ -24,10 +24,10 @@ const Bookings = () => {
 
 
     const hendelbookedDelet = (id) => {
-        const Confirm = confirm("Are you confirm delet this service")
+        const Confirm = confirm("Are you confirm delete this service")
 
         if(Confirm){
-            fetch(`http://localhost:5000/bookings/${id}`,{
+            fetch(`https://cars-doctor-server-2nd.vercel.app/bookings/${id}`, {
                 method: "DELETE"
             })
             .then(res => res.json())
@@ -42,7 +42,7 @@ const Bookings = () => {
     }
 
     const hendelBookingConfirm = (id) => {
-        fetch(`http://localhost:5000/bookings/${id}`,{
+        fetch(`https://cars-doctor-server-2nd.vercel.app/bookings/${id}`, {
             method: "PATCH",
             headers: {
                 'content-type': "application/json"

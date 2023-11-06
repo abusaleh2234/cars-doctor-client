@@ -19,20 +19,20 @@ const Login = () => {
 
         userLogin(email, password)
             .then(res => {
-                const logedinUser = res.user
-                console.log(logedinUser);
-                const user = { email }
+                const logedinUser = res.user;
+                // console.log(logedinUser);
+                // const user = { email }
 
                 // get acess token
-                axios.post("http://localhost:5000/jwt", user,
-                    { withCredentials: true }
-                )
-                    .then(res => {
-                        console.log(res.data);
-                        if (res.data.success) {
-                            navigate(location?.state ? location?.state : "/")
-                        }
-                    })
+                // axios.post("https://cars-doctor-server-2nd.vercel.app/jwt", user,
+                //     { withCredentials: true }
+                // )
+                //     .then(res => {
+                //         console.log(res.data);
+                //         if (res.data.success) {
+                //             navigate(location?.state ? location?.state : "/")
+                //         }
+                //     })
             })
             .catch(err => {
                 console.log(err);

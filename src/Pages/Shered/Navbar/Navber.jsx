@@ -49,7 +49,7 @@ const Navber = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <button className="btn btn-outline btn-error">Error</button>
+                <button className="btn btn-outline btn-error">Appointment</button>
             </div>
         </div>
     );
